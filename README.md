@@ -1,6 +1,13 @@
-## Physic-informed SDF editing using SDF-Diffusion
+# SDF-Diffusion
 
-Details see scripts.
+
+
+
+Diffusion-Based Signed Distance Fields for 3D Shape Generation (CVPR 2023)
+
+[**Paper**](https://openaccess.thecvf.com/content/CVPR2023/html/Shim_Diffusion-Based_Signed_Distance_Fields_for_3D_Shape_Generation_CVPR_2023_paper.html) | [**Project Page**](https://kitsunetic.github.io/sdf-diffusion/)
+
+
 
 
 ## Environment installation 
@@ -59,12 +66,6 @@ data
 ├── sdf.res64.level0.0313.PC15000.pad0.20.hdf5
 ```
 
-SDF-Diffsuion see paper:
-
-Diffusion-Based Signed Distance Fields for 3D Shape Generation (CVPR 2023)
-
-[**Paper**](https://openaccess.thecvf.com/content/CVPR2023/html/Shim_Diffusion-Based_Signed_Distance_Fields_for_3D_Shape_Generation_CVPR_2023_paper.html) | [**Project Page**](https://kitsunetic.github.io/sdf-diffusion/)
-
 Before downloading the dataset, please create [ShapeNet webpage](https://shapenet.org) and consider citing ShapeNet:
 ```bib
 @article{chang2015shapenet,
@@ -79,10 +80,56 @@ The dataset can be used only for non-commercial research and educational purpose
 
 
 
-## Checkpoints
+## Demo
 
 You can download pretrained checkpoints for [unconditional](https://github.com/Kitsunetic/SDF-Diffusion/releases/download/checkpoint/gen32.zip) and [category-conditional](https://github.com/Kitsunetic/SDF-Diffusion/releases/download/checkpoint/sr32_64.zip).
 Please unzip the `.zip` files in `./results` folder.
 
 You can find demo scripts in [unconditional](./scripts/demo-single_category.ipynb) and [category-conditional](./scripts/demo-multi-category.ipynb).
 
+
+
+
+## Training
+
+### Single Category Unconditional Generation
+
+```sh
+# generation (resolution 32)
+python main.py config/gen32/{airplane|car|chair}.yaml
+
+# super resolution (resolution 32 -> 64)
+python main.py config/sr32_64/{airplane|car|chair}.yaml
+```
+
+### Category Conditional Generation
+
+```sh
+# generation (resolution 32)
+python main.py config/gen32/shapenet.yaml
+
+# super resolution (resolution 32 -> 64)
+python main.py config/sr32_64/shapenet.yaml
+```
+
+
+<!-- 
+
+## Inference & Evaluation
+
+Comming Soon
+
+ -->
+
+
+## Citation
+
+```bib
+@inproceedings{shim2023diffusion,
+  title={Diffusion-Based Signed Distance Fields for 3D Shape Generation},
+  author={Shim, Jaehyeok and Kang, Changwoo and Joo, Kyungdon},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={20887--20897},
+  year={2023}
+}
+```
