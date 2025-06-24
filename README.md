@@ -1,7 +1,26 @@
 ## Physic-informed SDF editing using SDF-Diffusion
-
-  ![example](PISDF.png)
 Details see scripts.
+
+![image](PISDF.png)
+
+**Simulation-oriented editing with sdf:**
+1. DDim inversion + latent optimization
+Similar latent optimization method
+Different model: SDF-Diffusion, which outputs Signed Distance Fields (SDFs) --> easier to compute property estimates (e.g., volume) in a differentiable manner
+
+
+2. DDim inversion + noise guidance:
+Same model (SDF-Diffusion), same objective function (using the best version of volume_estimates). However, the gradient is applied at each denoising step to guide the generation
+
+Noise guidance: \
+(+) Faster (single gradient update per denoising step)\
+(-) Less accurate in achieving the target value \
+(-) Lower quality due to potential latent perturbation in final steps, resulting in a noisy shape\
+Instead, latent optimization is more controllable (loss threshold, num. iterations, …), but it comes at the cost of more iterations\
+
+Future works: 
+Mix the two methods, i.e., perform some optimization steps in a subset of denoising steps 
+Debug why optimization on the denoised shape (𝑥_0^𝐸 ) ̂ (i.e., backpropagating the gradients over all the denoising steps -- tgt_noise_level="zero”) is not feasible (out of memory) with the new DDIM functions1 whereas it was possible previously.
 
 
 ## Environment installation 
