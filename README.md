@@ -1,6 +1,6 @@
 ## Physic-informed SDF editing using SDF-Diffusion
 
-
+  ![example](PISDF.png)
 Details see scripts.
 
 
